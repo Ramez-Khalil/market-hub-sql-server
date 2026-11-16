@@ -1,0 +1,25 @@
+digraph G {
+ graph [bgcolor="#F8FAFC", pad="0.35", nodesep="0.45", ranksep="0.75", fontname="DejaVu Sans", fontsize=20, labelloc=t, labeljust=l];
+ node [shape=plain, fontname="DejaVu Sans", fontsize=10];
+ edge [fontname="DejaVu Sans", fontsize=9, color="#64748B", arrowsize=0.7];
+ label="MARKETHUB / Foreign-key map"; rankdir=LR;
+REGION [label=<<TABLE BORDER="1" COLOR="#CBD5E1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6"><TR><TD BGCOLOR="#0F2942" ALIGN="LEFT"><FONT COLOR="white"><B>REGION</B></FONT></TD></TR><TR><TD ALIGN="LEFT" BGCOLOR="#E8F4F1">PK RegionId</TD></TR></TABLE>>];
+STORE [label=<<TABLE BORDER="1" COLOR="#CBD5E1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6"><TR><TD BGCOLOR="#0F2942" ALIGN="LEFT"><FONT COLOR="white"><B>STORE</B></FONT></TD></TR><TR><TD ALIGN="LEFT" BGCOLOR="#E8F4F1">PK StoreId</TD></TR><TR><TD ALIGN="LEFT" BGCOLOR="#FFFFFF">FK RegionId</TD></TR></TABLE>>];
+VENDOR [label=<<TABLE BORDER="1" COLOR="#CBD5E1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6"><TR><TD BGCOLOR="#0F2942" ALIGN="LEFT"><FONT COLOR="white"><B>VENDOR</B></FONT></TD></TR><TR><TD ALIGN="LEFT" BGCOLOR="#E8F4F1">PK VendorId</TD></TR></TABLE>>];
+PRODUCT_CATEGORY [label=<<TABLE BORDER="1" COLOR="#CBD5E1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6"><TR><TD BGCOLOR="#0F2942" ALIGN="LEFT"><FONT COLOR="white"><B>PRODUCT_CATEGORY</B></FONT></TD></TR><TR><TD ALIGN="LEFT" BGCOLOR="#E8F4F1">PK CategoryId</TD></TR></TABLE>>];
+PRODUCT [label=<<TABLE BORDER="1" COLOR="#CBD5E1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6"><TR><TD BGCOLOR="#0F2942" ALIGN="LEFT"><FONT COLOR="white"><B>PRODUCT</B></FONT></TD></TR><TR><TD ALIGN="LEFT" BGCOLOR="#E8F4F1">PK ProductId</TD></TR><TR><TD ALIGN="LEFT" BGCOLOR="#FFFFFF">FK VendorId</TD></TR><TR><TD ALIGN="LEFT" BGCOLOR="#E8F4F1">FK CategoryId</TD></TR></TABLE>>];
+CUSTOMER [label=<<TABLE BORDER="1" COLOR="#CBD5E1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6"><TR><TD BGCOLOR="#0F2942" ALIGN="LEFT"><FONT COLOR="white"><B>CUSTOMER</B></FONT></TD></TR><TR><TD ALIGN="LEFT" BGCOLOR="#E8F4F1">PK CustomerId</TD></TR></TABLE>>];
+STORE_PRODUCT [label=<<TABLE BORDER="1" COLOR="#CBD5E1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6"><TR><TD BGCOLOR="#0F2942" ALIGN="LEFT"><FONT COLOR="white"><B>STORE_PRODUCT</B></FONT></TD></TR><TR><TD ALIGN="LEFT" BGCOLOR="#E8F4F1">PK FK StoreId</TD></TR><TR><TD ALIGN="LEFT" BGCOLOR="#FFFFFF">PK FK ProductId</TD></TR></TABLE>>];
+SALE [label=<<TABLE BORDER="1" COLOR="#CBD5E1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6"><TR><TD BGCOLOR="#0F2942" ALIGN="LEFT"><FONT COLOR="white"><B>SALE</B></FONT></TD></TR><TR><TD ALIGN="LEFT" BGCOLOR="#E8F4F1">PK SaleId</TD></TR><TR><TD ALIGN="LEFT" BGCOLOR="#FFFFFF">FK StoreId</TD></TR><TR><TD ALIGN="LEFT" BGCOLOR="#E8F4F1">FK CustomerId</TD></TR></TABLE>>];
+SALE_LINE [label=<<TABLE BORDER="1" COLOR="#CBD5E1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6"><TR><TD BGCOLOR="#0F2942" ALIGN="LEFT"><FONT COLOR="white"><B>SALE_LINE</B></FONT></TD></TR><TR><TD ALIGN="LEFT" BGCOLOR="#E8F4F1">PK FK SaleId</TD></TR><TR><TD ALIGN="LEFT" BGCOLOR="#FFFFFF">PK FK ProductId</TD></TR></TABLE>>];
+REGION -> STORE [label="RegionId → RegionId" headlabel="0..*" taillabel="1"];
+VENDOR -> PRODUCT [label="VendorId → VendorId" headlabel="0..*" taillabel="1"];
+PRODUCT_CATEGORY -> PRODUCT [label="CategoryId → CategoryId" headlabel="0..*" taillabel="1"];
+STORE -> STORE_PRODUCT [label="StoreId → StoreId" headlabel="0..*" taillabel="1"];
+PRODUCT -> STORE_PRODUCT [label="ProductId → ProductId" headlabel="0..*" taillabel="1"];
+STORE -> SALE [label="StoreId → StoreId" headlabel="0..*" taillabel="1"];
+CUSTOMER -> SALE [label="CustomerId → CustomerId" headlabel="0..*" taillabel="1"];
+SALE -> SALE_LINE [label="SaleId → SaleId" headlabel="0..*" taillabel="1"];
+PRODUCT -> SALE_LINE [label="ProductId → ProductId" headlabel="0..*" taillabel="1"];
+
+}

@@ -1,0 +1,7 @@
+.env
+*.bak
+*.mdf
+*.ldf
+*.log
+__pycache__/
+evidence/local/

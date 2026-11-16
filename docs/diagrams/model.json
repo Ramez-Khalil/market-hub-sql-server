@@ -1,0 +1,580 @@
+{
+  "tables": {
+    "REGION": {
+      "cols": [
+        {
+          "name": "RegionId",
+          "type": "int",
+          "nullable": false,
+          "tail": "NOT NULL CONSTRAINT PK_REGION PRIMARY KEY",
+          "computed": false
+        },
+        {
+          "name": "RegionName",
+          "type": "nvarchar(80)",
+          "nullable": false,
+          "tail": "NOT NULL CONSTRAINT UQ_REGION_Name UNIQUE",
+          "computed": false
+        },
+        {
+          "name": "County",
+          "type": "nvarchar(80)",
+          "nullable": true,
+          "tail": "NULL",
+          "computed": false
+        },
+        {
+          "name": "Description",
+          "type": "nvarchar(250)",
+          "nullable": true,
+          "tail": "NULL",
+          "computed": false
+        }
+      ],
+      "pk": [
+        "RegionId"
+      ],
+      "uq": [
+        [
+          "RegionName"
+        ]
+      ]
+    },
+    "STORE": {
+      "cols": [
+        {
+          "name": "StoreId",
+          "type": "int",
+          "nullable": false,
+          "tail": "NOT NULL CONSTRAINT PK_STORE PRIMARY KEY",
+          "computed": false
+        },
+        {
+          "name": "RegionId",
+          "type": "int",
+          "nullable": false,
+          "tail": "NOT NULL CONSTRAINT FK_STORE_REGION REFERENCES dbo.REGION(RegionId)",
+          "computed": false
+        },
+        {
+          "name": "StoreName",
+          "type": "nvarchar(100)",
+          "nullable": false,
+          "tail": "NOT NULL CONSTRAINT UQ_STORE_Name UNIQUE",
+          "computed": false
+        },
+        {
+          "name": "City",
+          "type": "nvarchar(80)",
+          "nullable": false,
+          "tail": "NOT NULL",
+          "computed": false
+        },
+        {
+          "name": "StreetAddress",
+          "type": "nvarchar(150)",
+          "nullable": true,
+          "tail": "NULL",
+          "computed": false
+        },
+        {
+          "name": "StateCode",
+          "type": "char(2)",
+          "nullable": true,
+          "tail": "NULL",
+          "computed": false
+        },
+        {
+          "name": "PostalCode",
+          "type": "varchar(10)",
+          "nullable": true,
+          "tail": "NULL",
+          "computed": false
+        },
+        {
+          "name": "ManagerName",
+          "type": "nvarchar(100)",
+          "nullable": true,
+          "tail": "NULL",
+          "computed": false
+        },
+        {
+          "name": "Phone",
+          "type": "varchar(25)",
+          "nullable": true,
+          "tail": "NULL",
+          "computed": false
+        },
+        {
+          "name": "OpeningHours",
+          "type": "nvarchar(150)",
+          "nullable": true,
+          "tail": "NULL",
+          "computed": false
+        }
+      ],
+      "pk": [
+        "StoreId"
+      ],
+      "uq": [
+        [
+          "StoreName"
+        ]
+      ]
+    },
+    "VENDOR": {
+      "cols": [
+        {
+          "name": "VendorId",
+          "type": "int",
+          "nullable": false,
+          "tail": "NOT NULL CONSTRAINT PK_VENDOR PRIMARY KEY",
+          "computed": false
+        },
+        {
+          "name": "VendorName",
+          "type": "nvarchar(100)",
+          "nullable": false,
+          "tail": "NOT NULL CONSTRAINT UQ_VENDOR_Name UNIQUE",
+          "computed": false
+        },
+        {
+          "name": "ContactName",
+          "type": "nvarchar(100)",
+          "nullable": true,
+          "tail": "NULL",
+          "computed": false
+        },
+        {
+          "name": "Email",
+          "type": "nvarchar(254)",
+          "nullable": true,
+          "tail": "NULL",
+          "computed": false
+        },
+        {
+          "name": "Phone",
+          "type": "varchar(25)",
+          "nullable": true,
+          "tail": "NULL",
+          "computed": false
+        },
+        {
+          "name": "StreetAddress",
+          "type": "nvarchar(150)",
+          "nullable": true,
+          "tail": "NULL",
+          "computed": false
+        },
+        {
+          "name": "City",
+          "type": "nvarchar(80)",
+          "nullable": true,
+          "tail": "NULL",
+          "computed": false
+        },
+        {
+          "name": "StateCode",
+          "type": "char(2)",
+          "nullable": true,
+          "tail": "NULL",
+          "computed": false
+        },
+        {
+          "name": "PostalCode",
+          "type": "varchar(10)",
+          "nullable": true,
+          "tail": "NULL",
+          "computed": false
+        }
+      ],
+      "pk": [
+        "VendorId"
+      ],
+      "uq": [
+        [
+          "VendorName"
+        ]
+      ]
+    },
+    "PRODUCT_CATEGORY": {
+      "cols": [
+        {
+          "name": "CategoryId",
+          "type": "int",
+          "nullable": false,
+          "tail": "NOT NULL CONSTRAINT PK_PRODUCT_CATEGORY PRIMARY KEY",
+          "computed": false
+        },
+        {
+          "name": "CategoryName",
+          "type": "nvarchar(80)",
+          "nullable": false,
+          "tail": "NOT NULL CONSTRAINT UQ_CATEGORY_Name UNIQUE",
+          "computed": false
+        },
+        {
+          "name": "County",
+          "type": "nvarchar(80)",
+          "nullable": true,
+          "tail": "NULL",
+          "computed": false
+        }
+      ],
+      "pk": [
+        "CategoryId"
+      ],
+      "uq": [
+        [
+          "CategoryName"
+        ]
+      ]
+    },
+    "PRODUCT": {
+      "cols": [
+        {
+          "name": "ProductId",
+          "type": "int",
+          "nullable": false,
+          "tail": "NOT NULL CONSTRAINT PK_PRODUCT PRIMARY KEY",
+          "computed": false
+        },
+        {
+          "name": "SKU",
+          "type": "varchar(30)",
+          "nullable": false,
+          "tail": "NOT NULL CONSTRAINT UQ_PRODUCT_SKU UNIQUE",
+          "computed": false
+        },
+        {
+          "name": "ProductName",
+          "type": "nvarchar(120)",
+          "nullable": false,
+          "tail": "NOT NULL",
+          "computed": false
+        },
+        {
+          "name": "Description",
+          "type": "nvarchar(250)",
+          "nullable": true,
+          "tail": "NULL",
+          "computed": false
+        },
+        {
+          "name": "VendorId",
+          "type": "int",
+          "nullable": false,
+          "tail": "NOT NULL CONSTRAINT FK_PRODUCT_VENDOR REFERENCES dbo.VENDOR(VendorId)",
+          "computed": false
+        },
+        {
+          "name": "CategoryId",
+          "type": "int",
+          "nullable": false,
+          "tail": "NOT NULL CONSTRAINT FK_PRODUCT_CATEGORY REFERENCES dbo.PRODUCT_CATEGORY(CategoryId)",
+          "computed": false
+        },
+        {
+          "name": "CurrentUnitPrice",
+          "type": "decimal(12,2)",
+          "nullable": false,
+          "tail": "NOT NULL CONSTRAINT CK_PRODUCT_Price CHECK(CurrentUnitPrice >= 0)",
+          "computed": false
+        },
+        {
+          "name": "ProductType",
+          "type": "char(1)",
+          "nullable": false,
+          "tail": "NOT NULL",
+          "computed": false
+        },
+        {
+          "name": "ShelfLifeDays",
+          "type": "int",
+          "nullable": true,
+          "tail": "NULL",
+          "computed": false
+        },
+        {
+          "name": "WarrantyMonths",
+          "type": "int",
+          "nullable": true,
+          "tail": "NULL",
+          "computed": false
+        }
+      ],
+      "pk": [
+        "ProductId"
+      ],
+      "uq": [
+        [
+          "SKU"
+        ]
+      ]
+    },
+    "CUSTOMER": {
+      "cols": [
+        {
+          "name": "CustomerId",
+          "type": "int",
+          "nullable": false,
+          "tail": "NOT NULL CONSTRAINT PK_CUSTOMER PRIMARY KEY",
+          "computed": false
+        },
+        {
+          "name": "FirstName",
+          "type": "nvarchar(50)",
+          "nullable": false,
+          "tail": "NOT NULL",
+          "computed": false
+        },
+        {
+          "name": "LastName",
+          "type": "nvarchar(50)",
+          "nullable": false,
+          "tail": "NOT NULL",
+          "computed": false
+        },
+        {
+          "name": "CustomerName",
+          "type": "computed expression",
+          "nullable": true,
+          "tail": "(FirstName + N' ' + LastName)",
+          "computed": true
+        },
+        {
+          "name": "Phone",
+          "type": "varchar(25)",
+          "nullable": true,
+          "tail": "NULL",
+          "computed": false
+        },
+        {
+          "name": "StreetAddress",
+          "type": "nvarchar(150)",
+          "nullable": true,
+          "tail": "NULL",
+          "computed": false
+        },
+        {
+          "name": "City",
+          "type": "nvarchar(80)",
+          "nullable": true,
+          "tail": "NULL",
+          "computed": false
+        },
+        {
+          "name": "StateCode",
+          "type": "char(2)",
+          "nullable": true,
+          "tail": "NULL",
+          "computed": false
+        },
+        {
+          "name": "PostalCode",
+          "type": "varchar(10)",
+          "nullable": true,
+          "tail": "NULL",
+          "computed": false
+        },
+        {
+          "name": "Email",
+          "type": "nvarchar(254)",
+          "nullable": false,
+          "tail": "NOT NULL CONSTRAINT UQ_CUSTOMER_Email UNIQUE",
+          "computed": false
+        }
+      ],
+      "pk": [
+        "CustomerId"
+      ],
+      "uq": [
+        [
+          "Email"
+        ]
+      ]
+    },
+    "STORE_PRODUCT": {
+      "cols": [
+        {
+          "name": "StoreId",
+          "type": "int",
+          "nullable": false,
+          "tail": "NOT NULL CONSTRAINT FK_STORE_PRODUCT_STORE REFERENCES dbo.STORE(StoreId)",
+          "computed": false
+        },
+        {
+          "name": "ProductId",
+          "type": "int",
+          "nullable": false,
+          "tail": "NOT NULL CONSTRAINT FK_STORE_PRODUCT_PRODUCT REFERENCES dbo.PRODUCT(ProductId)",
+          "computed": false
+        },
+        {
+          "name": "StockQuantity",
+          "type": "int",
+          "nullable": false,
+          "tail": "NOT NULL CONSTRAINT CK_INVENTORY_Stock CHECK(StockQuantity >= 0)",
+          "computed": false
+        },
+        {
+          "name": "ReorderLevel",
+          "type": "int",
+          "nullable": false,
+          "tail": "NOT NULL CONSTRAINT CK_INVENTORY_Reorder CHECK(ReorderLevel >= 0)",
+          "computed": false
+        }
+      ],
+      "pk": [
+        "StoreId",
+        "ProductId"
+      ],
+      "uq": []
+    },
+    "SALE": {
+      "cols": [
+        {
+          "name": "SaleId",
+          "type": "bigint",
+          "nullable": false,
+          "tail": "IDENTITY(1,1) NOT NULL CONSTRAINT PK_SALE PRIMARY KEY",
+          "computed": false
+        },
+        {
+          "name": "StoreId",
+          "type": "int",
+          "nullable": false,
+          "tail": "NOT NULL CONSTRAINT FK_SALE_STORE REFERENCES dbo.STORE(StoreId)",
+          "computed": false
+        },
+        {
+          "name": "CustomerId",
+          "type": "int",
+          "nullable": false,
+          "tail": "NOT NULL CONSTRAINT FK_SALE_CUSTOMER REFERENCES dbo.CUSTOMER(CustomerId)",
+          "computed": false
+        },
+        {
+          "name": "SoldAt",
+          "type": "datetime2(0)",
+          "nullable": false,
+          "tail": "NOT NULL",
+          "computed": false
+        },
+        {
+          "name": "Description",
+          "type": "nvarchar(250)",
+          "nullable": true,
+          "tail": "NULL",
+          "computed": false
+        }
+      ],
+      "pk": [
+        "SaleId"
+      ],
+      "uq": []
+    },
+    "SALE_LINE": {
+      "cols": [
+        {
+          "name": "SaleId",
+          "type": "bigint",
+          "nullable": false,
+          "tail": "NOT NULL",
+          "computed": false
+        },
+        {
+          "name": "ProductId",
+          "type": "int",
+          "nullable": false,
+          "tail": "NOT NULL",
+          "computed": false
+        },
+        {
+          "name": "Quantity",
+          "type": "int",
+          "nullable": false,
+          "tail": "NOT NULL CONSTRAINT CK_SALE_LINE_Quantity CHECK(Quantity > 0)",
+          "computed": false
+        },
+        {
+          "name": "UnitPriceAtSale",
+          "type": "decimal(12,2)",
+          "nullable": false,
+          "tail": "NOT NULL CONSTRAINT CK_SALE_LINE_Price CHECK(UnitPriceAtSale >= 0)",
+          "computed": false
+        }
+      ],
+      "pk": [
+        "SaleId",
+        "ProductId"
+      ],
+      "uq": []
+    }
+  },
+  "foreign_keys": [
+    {
+      "child": "STORE",
+      "name": "FK_STORE_REGION",
+      "cols": "RegionId",
+      "parent": "REGION",
+      "refs": "RegionId"
+    },
+    {
+      "child": "PRODUCT",
+      "name": "FK_PRODUCT_VENDOR",
+      "cols": "VendorId",
+      "parent": "VENDOR",
+      "refs": "VendorId"
+    },
+    {
+      "child": "PRODUCT",
+      "name": "FK_PRODUCT_CATEGORY",
+      "cols": "CategoryId",
+      "parent": "PRODUCT_CATEGORY",
+      "refs": "CategoryId"
+    },
+    {
+      "child": "STORE_PRODUCT",
+      "name": "FK_STORE_PRODUCT_STORE",
+      "cols": "StoreId",
+      "parent": "STORE",
+      "refs": "StoreId"
+    },
+    {
+      "child": "STORE_PRODUCT",
+      "name": "FK_STORE_PRODUCT_PRODUCT",
+      "cols": "ProductId",
+      "parent": "PRODUCT",
+      "refs": "ProductId"
+    },
+    {
+      "child": "SALE",
+      "name": "FK_SALE_STORE",
+      "cols": "StoreId",
+      "parent": "STORE",
+      "refs": "StoreId"
+    },
+    {
+      "child": "SALE",
+      "name": "FK_SALE_CUSTOMER",
+      "cols": "CustomerId",
+      "parent": "CUSTOMER",
+      "refs": "CustomerId"
+    },
+    {
+      "child": "SALE_LINE",
+      "name": "FK_SALE_LINE_SALE",
+      "cols": "SaleId",
+      "parent": "SALE",
+      "refs": "SaleId"
+    },
+    {
+      "child": "SALE_LINE",
+      "name": "FK_SALE_LINE_PRODUCT",
+      "cols": "ProductId",
+      "parent": "PRODUCT",
+      "refs": "ProductId"
+    }
+  ]
+}

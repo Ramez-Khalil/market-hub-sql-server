@@ -1,0 +1,52 @@
+name: SQL Server integration
+on:
+  workflow_dispatch:
+    inputs:
+      accept_sql_server_license:
+        description: "I have reviewed and accept Microsoft SQL Server Developer license terms for this run"
+        required: true
+        type: boolean
+        default: false
+permissions:
+  contents: read
+jobs:
+  integration:
+    if: ${{ inputs.accept_sql_server_license }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Start isolated SQL Server Developer
+        shell: bash
+        run: |
+          # Disposable CI-only password generated for this run; never a user credential.
+          password="Ci$(openssl rand -hex 16)!7"
+          echo "::add-mask::$password"
+          echo "SQL_PASSWORD=$password" >> "$GITHUB_ENV"
+          docker run --name market-sql -d -e ACCEPT_EULA=Y -e MSSQL_PID=Developer \
+            -e MSSQL_SA_PASSWORD="$password" mcr.microsoft.com/mssql/server:2022-latest
+          for attempt in $(seq 1 60); do
+            if docker exec market-sql /opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P "$password" -C -Q 'SELECT 1' >/dev/null 2>&1; then exit 0; fi
+            sleep 2
+          done
+          docker logs market-sql
+          exit 1
+      - name: Build and verify
+        shell: bash
+        run: |
+          mkdir -p evidence/ci
+          docker cp sql market-sql:/tmp/markethub-sql
+          for script in 00_create_database 01_schema 02_seed 03_reports 04_tests; do
+            docker exec market-sql /opt/mssql-tools18/bin/sqlcmd -S localhost -U sa \
+              -P "$SQL_PASSWORD" -C -b -r1 -W -s '|' \
+              -i "/tmp/markethub-sql/$script.sql" | tee "evidence/ci/$script.txt"
+          done
+      - name: Save execution evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sql-server-execution
+          path: evidence/ci
+      - name: Stop disposable server
+        if: always()
+        run: docker rm -f market-sql || true

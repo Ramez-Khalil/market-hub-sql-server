@@ -1,0 +1,22 @@
+digraph G {
+ graph [bgcolor="#F8FAFC", pad="0.35", nodesep="0.45", ranksep="0.75", fontname="DejaVu Sans", fontsize=20, labelloc=t, labeljust=l];
+ node [shape=plain, fontname="DejaVu Sans", fontsize=10];
+ edge [fontname="DejaVu Sans", fontsize=9, color="#64748B", arrowsize=0.7];
+ label="MARKETHUB / Business concepts"; rankdir=LR;
+node [shape=box, style="rounded,filled", fillcolor="#E8F4F1", color="#79A89C", margin="0.18,0.12"];
+REGION;
+STORE;
+VENDOR;
+PRODUCT_CATEGORY;
+PRODUCT;
+CUSTOMER;
+SALE;
+REGION -> STORE [label="contains",taillabel="1",headlabel="0..*"];
+VENDOR -> PRODUCT [label="supplies",taillabel="1",headlabel="0..*"];
+PRODUCT_CATEGORY -> PRODUCT [label="classifies",taillabel="1",headlabel="0..*"];
+STORE -> SALE [label="records",taillabel="1",headlabel="0..*"];
+CUSTOMER -> SALE [label="places",taillabel="1",headlabel="0..*"];
+STORE -> PRODUCT [dir=both, label="stocks / STORE_PRODUCT",taillabel="0..*",headlabel="0..*"];
+SALE -> PRODUCT [dir=both,label="includes / SALE_LINE",taillabel="0..*",headlabel="1..*"];
+
+}

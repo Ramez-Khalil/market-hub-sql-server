@@ -1,0 +1,10 @@
+digraph G {
+ graph [bgcolor="#F8FAFC", pad="0.35", nodesep="0.45", ranksep="0.75", fontname="DejaVu Sans", fontsize=20, labelloc=t, labeljust=l];
+ node [shape=plain, fontname="DejaVu Sans", fontsize=10];
+ edge [fontname="DejaVu Sans", fontsize=9, color="#64748B", arrowsize=0.7];
+ label="MARKETHUB / Product specialization"; rankdir=TB;
+PRODUCT [label=<<TABLE BORDER="1" COLOR="#CBD5E1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6"><TR><TD BGCOLOR="#0F2942" ALIGN="LEFT"><FONT COLOR="white"><B>PRODUCT</B></FONT></TD></TR><TR><TD ALIGN="LEFT" BGCOLOR="#E8F4F1">ProductId · shared identity</TD></TR><TR><TD ALIGN="LEFT" BGCOLOR="#FFFFFF">ProductType = P or D</TD></TR><TR><TD ALIGN="LEFT" BGCOLOR="#E8F4F1">Total and disjoint classification</TD></TR></TABLE>>];
+PERISHABLE_PRODUCT [label=<<TABLE BORDER="1" COLOR="#CBD5E1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6"><TR><TD BGCOLOR="#0F2942" ALIGN="LEFT"><FONT COLOR="white"><B>PERISHABLE_PRODUCT</B></FONT></TD></TR><TR><TD ALIGN="LEFT" BGCOLOR="#E8F4F1">ProductType = P</TD></TR><TR><TD ALIGN="LEFT" BGCOLOR="#FFFFFF">ShelfLifeDays &gt; 0</TD></TR><TR><TD ALIGN="LEFT" BGCOLOR="#E8F4F1">WarrantyMonths is NULL</TD></TR><TR><TD ALIGN="LEFT" BGCOLOR="#FFFFFF">SQL view over PRODUCT</TD></TR></TABLE>>];
+DURABLE_PRODUCT [label=<<TABLE BORDER="1" COLOR="#CBD5E1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="6"><TR><TD BGCOLOR="#0F2942" ALIGN="LEFT"><FONT COLOR="white"><B>DURABLE_PRODUCT</B></FONT></TD></TR><TR><TD ALIGN="LEFT" BGCOLOR="#E8F4F1">ProductType = D</TD></TR><TR><TD ALIGN="LEFT" BGCOLOR="#FFFFFF">WarrantyMonths &gt;= 0</TD></TR><TR><TD ALIGN="LEFT" BGCOLOR="#E8F4F1">ShelfLifeDays is NULL</TD></TR><TR><TD ALIGN="LEFT" BGCOLOR="#FFFFFF">SQL view over PRODUCT</TD></TR></TABLE>>];
+PRODUCT -> PERISHABLE_PRODUCT [label="P"]; PRODUCT -> DURABLE_PRODUCT [label="D"];
+}

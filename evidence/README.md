@@ -12,7 +12,7 @@ Verified on **Microsoft SQL Server 2025 Standard Developer**, engine **17.0.1000
 | `03_reports.sql` | Exit 0: all five reporting result sets returned |
 | `04_tests.sql` | Exit 0: **ALL TESTS PASSED** |
 
-The runtime suite passed **19 expected-error cases** plus seed-count/revenue/stock/subtype checks, historical-price preservation after repricing, a successful two-item sale with both stock decrements, and outer-transaction rollback. Full captured output is stored in `sql-server/`. Errors were not suppressed; stdout and stderr were captured.
+The runtime suite passed **19 expected-error cases** plus seed-count/revenue/stock/subtype checks, historical-price preservation after repricing, a successful two-item sale with both stock decrements, and outer-transaction rollback. Full captured output is stored in [sql-server/](sql-server/), including the [test log](sql-server/04_tests.txt) and [five report result sets](sql-server/03_reports.txt). Errors were not suppressed; stdout and stderr were captured.
 
 Confirmed seed totals: **6 sales, 12 sale lines, 27 units, $262.00**. Store revenue: **Harbor Market $133.50; River Market $74.00; Meadow Market $54.50**. Every name and transaction in the dataset is fictional.
 

@@ -54,6 +54,10 @@ These synthetic-data totals were confirmed by the SQL Server run. They demonstra
 | River Market | $74.00 |
 | **Total: six sales, 27 units** | **$262.00** |
 
+## Project report
+
+Read the [paginated MarketHubDB project report](docs/MarketHubDB_Project_Report.pdf) for the business rules, model, column definitions, normalization and verified SQL Server results.
+
 ## Explore the design
 
 | View | What it explains |

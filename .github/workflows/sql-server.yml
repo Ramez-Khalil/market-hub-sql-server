@@ -39,7 +39,7 @@ jobs:
           for script in 00_create_database 01_schema 02_seed 03_reports 04_tests; do
             docker exec market-sql /opt/mssql-tools18/bin/sqlcmd -S localhost -U sa \
               -P "$SQL_PASSWORD" -C -b -r1 -W -s '|' \
-              -i "/tmp/markethub-sql/$script.sql" | tee "evidence/ci/$script.txt"
+              -i "/tmp/markethub-sql/$script.sql" 2>&1 | tee "evidence/ci/$script.txt"
           done
       - name: Save execution evidence
         if: always()

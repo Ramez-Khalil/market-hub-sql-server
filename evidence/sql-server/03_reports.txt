@@ -1,0 +1,38 @@
+Changed database context to 'MarketHubPortfolio'.
+RegionName|StoreName|Sales|Revenue
+----------|---------|-----|-------
+West|Harbor Market|3|133.50
+East|River Market|1|74.00
+West|Meadow Market|2|54.50
+
+(3 rows affected)
+SalesMonth|Sales|Revenue|AverageBasket
+----------|-----|-------|-------------
+2026-01|3|105.50|35.17
+2026-02|3|156.50|52.17
+
+(2 rows affected)
+SKU|ProductName|UnitsSold|Revenue
+---|-----------|---------|-------
+MH-COFFEE|Ground coffee|6|75.00
+MH-LAMP|Desk lamp|3|75.00
+MH-CABLE|USB cable|5|40.00
+MH-OATS|Rolled oats|8|32.00
+MH-MUG|Ceramic mug|3|27.00
+MH-TEA|Black tea|2|13.00
+
+(6 rows affected)
+StoreName|SKU|StockQuantity|ReorderLevel|UnitsToExceedThreshold
+---------|---|-------------|------------|----------------------
+Meadow Market|MH-TEA|3|3|1
+River Market|MH-LAMP|2|3|2
+
+(2 rows affected)
+CustomerName|Purchases|Revenue
+------------|---------|-------
+Jordan Sample|2|111.00
+Taylor Sample|2|72.00
+Casey Sample|1|53.50
+Morgan Sample|1|25.50
+
+(4 rows affected)

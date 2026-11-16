@@ -1,4 +1,4 @@
 PASS: 9 tables, 9 PKs, 9 FKs, sale-price snapshot, normalized lines,
       transaction locking, subtype check, no destructive database reset,
       synthetic data, 6 sale calls, independent 27-unit/$262.00 oracle.
-NOT TESTED: SQL Server compilation, constraints, runtime behavior or concurrency.
+STATIC CHECK ONLY: see engine execution logs for SQL Server runtime verification.

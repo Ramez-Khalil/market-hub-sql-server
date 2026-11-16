@@ -1,23 +1,30 @@
 # Verification evidence
 
-`static-check.txt` records the dependency-free source review (`python tests/static_check.py`).
-It is **not** proof that SQL Server compiled or executed the scripts.
+## SQL Server execution
 
-The runtime suite is `sql/04_tests.sql`. It contains nineteen expected-error cases and
-positive checks of seed totals, subtype partitioning, historical pricing, transactional
-sales, stock changes and rollback. A successful run ends with `ALL TESTS PASSED`.
+Verified on **Microsoft SQL Server 2025 Standard Developer**, engine **17.0.1000.7**, x64, using a fresh isolated `MarketHubPortfolio` database on Windows.
 
-SQL Server execution has **not yet been verified** in this repository. No runtime logs
-are included or invented. After execution, preserve complete SQL output and engine
-version. The GitHub workflow is manual and requires the operator to review and accept
-Microsoft's SQL Server Developer license. Publishing a commit does not start it.
+| Script | Result |
+|---|---|
+| `00_create_database.sql` | Exit 0: fresh database created |
+| `01_schema.sql` | Exit 0: schema, constraints, views, procedure and role created |
+| `02_seed.sql` | Exit 0: fictional seed scenario loaded |
+| `03_reports.sql` | Exit 0: all five reporting result sets returned |
+| `04_tests.sql` | Exit 0: **ALL TESTS PASSED** |
 
-The arithmetic oracle is independently computed from six synthetic baskets:
-$37.00 + $43.00 + $25.50 + $74.00 + $29.00 + $53.50 = **$262.00**, **27 units**.
-These are example-data expectations, not business performance.
+The runtime suite passed **19 expected-error cases** plus seed-count/revenue/stock/subtype checks, historical-price preservation after repricing, a successful two-item sale with both stock decrements, and outer-transaction rollback. Full captured output is stored in `sql-server/`. Errors were not suppressed; stdout and stderr were captured.
 
-## Remaining runtime coverage
+Confirmed seed totals: **6 sales, 12 sale lines, 27 units, $262.00**. Store revenue: **Harbor Market $133.50; River Market $74.00; Meadow Market $54.50**. Every name and transaction in the dataset is fictional.
 
-- Execute all five SQL scripts on SQL Server 2022 or newer.
-- Run concurrent stock contention in two sessions; locking is implemented, not load-tested.
-- Inspect execution plans with production-scale data before performance claims.
+The scripts were run directly through `sqlcmd` using Windows integrated authentication. The local development server's self-signed certificate was trusted explicitly for that local test connection only; no server encryption or global security setting was changed. The PowerShell convenience wrapper and GitHub workflow were not used for this run.
+
+## Source and model checks
+
+`static-check.txt` records the dependency-free checks from `python tests/static_check.py`: nine tables, nine primary keys, nine foreign keys, normalized sale lines, historical-price column, transactional locking, subtype checks, and an independent arithmetic oracle. These checks supplement, rather than replace, the engine execution above.
+
+## Scope of verification
+
+- Concurrent stock contention has not been load-tested in multiple sessions; the procedure uses update and serializable-range locks.
+- Performance has not been benchmarked on production-scale data.
+- The manual GitHub workflow has not run. It requires an operator to review and accept Microsoft SQL Server Developer terms; pushing a commit does not start it.
+- Tests preserve seeded rows; identity gaps left by failed/rolled-back test inserts are expected.

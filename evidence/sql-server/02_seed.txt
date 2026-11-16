@@ -1,0 +1,37 @@
+Changed database context to 'MarketHubPortfolio'.
+
+(2 rows affected)
+
+(3 rows affected)
+
+(3 rows affected)
+
+(3 rows affected)
+
+(6 rows affected)
+
+(4 rows affected)
+
+(14 rows affected)
+
+(2 rows affected)
+
+(2 rows affected)
+
+(2 rows affected)
+
+(2 rows affected)
+
+(2 rows affected)
+
+(2 rows affected)
+
+(2 rows affected)
+
+(2 rows affected)
+
+(2 rows affected)
+
+(2 rows affected)
+
+(2 rows affected)

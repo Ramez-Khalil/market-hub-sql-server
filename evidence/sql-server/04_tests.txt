@@ -1,0 +1,34 @@
+Changed database context to 'MarketHubPortfolio'.
+EngineVersion
+-------------
+Microsoft SQL Server 2025 (RTM) - 17.0.1000.7 (X64) 
+	Oct 21 2025 12:05:57 
+	Copyright (C) 2025 Microsoft Corporation
+	Standard Developer Edition (64-bit) on Windows 10 Pro 10.0 <X64> (Build 26300: ) (Hypervisor)
+
+
+(1 rows affected)
+PASS: duplicate SKU
+PASS: missing product vendor
+PASS: missing product category
+PASS: missing store region
+PASS: missing sale customer
+PASS: missing sale store
+PASS: missing line sale
+PASS: missing line product
+PASS: negative inventory
+PASS: zero line quantity
+PASS: negative historical price
+PASS: negative product price
+PASS: unknown subtype
+PASS: overlapping subtype attributes
+PASS: missing required subtype attribute
+PASS: empty sale
+PASS: item not carried by store
+PASS: insufficient inventory
+PASS: atomic rollback on invalid customer
+PASS: seed counts, $262.00 revenue, 27 units, stock and subtype oracles
+PASS: historical sale prices survive product repricing
+PASS: successful multi-item sale, both stock decrements, outer transaction rollback
+PASS: tests preserve seeded rows (identity gaps are expected)
+ALL TESTS PASSED

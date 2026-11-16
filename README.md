@@ -15,7 +15,7 @@ MarketHubDB models a small multi-store retailer: who supplies each product, wher
 - **Five reports:** store revenue, monthly basket value, product demand, replenishment needs and repeat-customer activity.
 - **Fictional seed data, SQL assertions and model diagrams** for an inspectable, reproducible portfolio project.
 
-**Current verification:** model assets and source checks are available; SQL Server runtime execution has not yet been verified. See [verification evidence](evidence/README.md).
+**Verified on SQL Server 2025 Standard Developer (17.0.1000.7):** all five scripts completed successfully, including 19 expected-error tests and positive checks for totals, historical prices, atomic stock updates and rollback. See [execution evidence](evidence/README.md).
 
 ## Quick start
 
@@ -45,7 +45,7 @@ Use your actual instance name. The runner stops on errors and does not replace e
 
 ### Expected fictional-data checks
 
-These figures are arithmetic expectations from the seed baskets, not claimed SQL output or real sales:
+These synthetic-data totals were confirmed by the SQL Server run. They demonstrate the model; they are not real business sales:
 
 | Store | Expected revenue |
 |---|---:|
